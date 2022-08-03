@@ -2,21 +2,25 @@
     margin: 0%;
 }
 
-header{
+header {
     background: linear-gradient(to top, rgb(252, 251, 251), rgb(252, 221, 221));
     height: 20vh;
     text-align: center;
-    font-family: Verdana;
+    font-family: Impact;
     padding: 1em;
 }
-main{
-    height: 59vh;
+
+main {
+    min-height: 59vh;
     text-align: center;
     padding-top: 2em;
     padding-left: 1em;
     padding-right: 1em;
+    font-family: Verdana;
+    background-color: rgb(229, 231, 240);
 }
-footer{
+
+footer {
     display: flex;
     align-items: flex-end;
     height: 10vh;
@@ -25,4 +29,46 @@ footer{
     padding: 1em;
     background-color: rgb(200, 200, 228);
 
+}
+
+.ConjuntoMaterias {
+    display: flex;
+    flex-direction: row;
+}
+
+.anio {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: 10px;
+    justify-content: center;
+
+}
+
+h2 {
+    font-size: 30px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    color: rgb(85, 83, 83);
+}
+
+em {
+    color: coral;
+}
+
+fieldset p {
+    text-align: left;
+    padding: 5px;
+    margin: 10px;
+    background-color: rgba(121, 115, 115, 0.3);
+}
+
+fieldset p:hover {
+    background-color: rgba(165, 5, 5, 0.3);
+}
+
+input {
+    width: 8em;
+    height: 2em;
+    font-size: larger;
 }

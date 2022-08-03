@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,20 +8,74 @@
     <link rel="stylesheet" href="./css/styles.css">
     <title>calculo</title>
 </head>
+
 <body>
     <header>
-        <h1>CALCULO DE OPERACIONES !</h1>
+        <h1>CALCULO DE CORRELATIVIDADES!</h1>
     </header>
-    
-    <main>
-        <h2>PRIMERA ENTREGA pROYECTO FINAL </h2>
-        <form action="">
 
+    <main>
+        <h2>[ Desafío: Incorporar eventos ]</h2>
+        <em>haga click en la materia que desea cursar/rendir, para saber cuales son todas las materias que nesecita
+            tener aprovadas</em>
+        <form action="">
+            <section class="ConjuntoMaterias">
+                <fieldset class="anio">
+                    <legend> PRE-INGRESO </legend>
+                    <P id="1" class="materias">Introducción a la carrera de Comunicación Social</P>
+                    <p id="2" class="materias">Técnicas de Estudio y Comprensión de Textos</p>
+                </fieldset>
+                <fieldset class="anio">
+                    <legend> PRIMER AÑO </legend>
+                    <fieldset class="cuatrimestre">
+                        <legend> 1° cuatrimestre</legend>
+                        <p id="3" class="materias">Historia Social Contemporánea</p>
+                        <p id="4" class="materias">Introducción a la Comunicación Social</p>
+                        <p id="5" class="materias"> Teoría del Conocimiento y Lógica</p>
+                    </fieldset>
+                    <fieldset class="cuatrimestre">
+                        <legend> 2° cuatrimestre</legend>
+                        <p id="6" class="materias"> Economía y Comunicación</p>
+                        <p id="7" class="materias">Psicología y Comunicación</p>
+                        <p id="8" class="materias"> Teorías Sociológicas I</p>
+                    </fieldset>
+                    <fieldset class="anual">
+                        <legend> anual</legend>
+                        <p id="9" class="materias">Lenguaje I y Producción Gráfica</p>
+                    </fieldset>
+                </fieldset>
+                <fieldset class="anio">
+                    <legend> SEGUNDO AÑO </legend>
+                    <fieldset class="cuatrimestre">
+                        <legend> 1° cuatrimestre</legend>
+                        <p id="10" class="materias">Psicología Social </p>
+                        <p id="11" class="materias">Teorías Sociológicas II</p>
+                        <p id="12" class="materias">Taller: Informática Básica Aplicada</p>
+                    </fieldset>
+                    <fieldset class="cuatrimestre">
+                        <legend> 2° cuatrimestre</legend>
+                        <p id="13" class="materias">Lingüística</p>
+                        <p id="14" class="materias">Teorías de la Comunicación I</p>
+                        <p id="15" class="materias">Historia Argentina Contemporánea</p>
+                    </fieldset>
+                    <fieldset class="anual">
+                        <legend> anual</legend>
+                        <p id="16" class="materias">Lenguaje II y Producción Radiofónica</p>
+                    </fieldset>
+                </fieldset>
+            </section>
+            <section>
+                <input type="reset" value="Limpiar" id="boton">
+            </section>
         </form>
+
     </main>
-    <footer><p>Paguina derivada de Sistemas de la facultad de ciencias de la comunicacion FCC <a href="https://carlos-alt-sistemas.netlify.app"><b>Sistemas FCC</b></a></p>
+    <footer>
+        <p>Paguina derivada de Sistemas de la facultad de ciencias de la comunicacion FCC <a
+                href="https://carlos-alt-sistemas.netlify.app"><b>Sistemas FCC</b></a></p>
 
     </footer>
     <script src="./js/scrip.js"></script>
 </body>
+
 </html>
