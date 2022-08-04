@@ -16,8 +16,7 @@
 
     <main>
         <h2>[ Desafío: Incorporar eventos ]</h2>
-        <em>haga click en la materia que desea cursar/rendir, para saber cuales son todas las materias que nesecita
-            tener aprovadas</em>
+        <em>haga click en la materia que desea consultar. </em>
         <form action="">
             <section class="ConjuntoMaterias">
                 <fieldset class="anio">
@@ -50,7 +49,7 @@
                         <legend> 1° cuatrimestre</legend>
                         <p id="10" class="materias">Psicología Social </p>
                         <p id="11" class="materias">Teorías Sociológicas II</p>
-                        <p id="12" class="materias">Taller: Informática Básica Aplicada</p>
+                        <p id="12" class="materias">Informática Básica Aplicada</p>
                     </fieldset>
                     <fieldset class="cuatrimestre">
                         <legend> 2° cuatrimestre</legend>
@@ -62,11 +61,37 @@
                         <legend> anual</legend>
                         <p id="16" class="materias">Lenguaje II y Producción Radiofónica</p>
                     </fieldset>
+
+                </fieldset>
+                <fieldset class="anio">
+                    <legend> TERCER AÑO </legend>
+                    <fieldset class="cuatrimestre">
+                        <legend> 1° cuatrimestre</legend>
+                        <p id="17" class="materias">Teorías de la Comunicación II</p>
+                        <p id="18" class="materias">Antropología Socio-Cultural</p>
+                        <p id="19" class="materias">Movimientos Estéticos y Cultura Argentina</p>
+                    </fieldset>
+                    <fieldset class="cuatrimestre">
+                        <legend> 2° cuatrimestre</legend>
+                        <p id="20" class="materias"> Semiótica</p>
+                        <p id="21" class="materias">Política y Comunicación</p>
+                        <p id="22" class="materias">Metodología de la Inv. aplicada</p>
+                    </fieldset>
+                    <fieldset class="anual">
+                        <legend> anual</legend>
+                        <p id="23" class="materias">Lenguaje III y Producción Audiovisual</p>
+                    </fieldset>
+
                 </fieldset>
             </section>
             <section>
-                <input type="reset" value="Limpiar" id="boton">
+                <input type="radio" name="forma" id="apro" value="aprobadas" class="radio">
+                <label for="aprobadas">Aprovadas necesarias marcando la materia</label>
+                <input type="radio" name="forma" id="correl" value="correlativas" checked class="radio">
+                <label for="correlativas" >Correlativas accesibles marcando materias aprovadas</label>
             </section>
+            <input type="submit" value="Limpiar" id="limpiar" class="limpiar">
+            <p>[Economia y comunicación no tiene correlativas en los primeros tres años de la carrera !!]</p>
         </form>
 
     </main>

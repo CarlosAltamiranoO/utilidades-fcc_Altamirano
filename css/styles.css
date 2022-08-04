@@ -55,20 +55,29 @@ h2 {
 em {
     color: coral;
 }
+.anio{
+    border: solid 3px;
+}
 
 fieldset p {
     text-align: left;
     padding: 5px;
     margin: 10px;
     background-color: rgba(121, 115, 115, 0.3);
+    font-size: smaller;
 }
 
 fieldset p:hover {
     background-color: rgba(165, 5, 5, 0.3);
 }
 
-input {
-    width: 8em;
+.limpiar{
+    width: 12em;
     height: 2em;
     font-size: larger;
+    margin: 1em;
+}
+label{
+    font-size: larger;
+    margin-right: 1em;
 }
