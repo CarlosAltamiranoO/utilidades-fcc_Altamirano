@@ -235,13 +235,6 @@ class PresupuestoTec {
         this.precioCuota = parseFloat(precioCuota);
         this.total = parseFloat(total);
     }
-    /*     precioCuota(recargo){
-            return ((this.monto/ this.cuotas) *100 ) / ParseFloat(recargo); 
-        }
-        precioTotal(recargo){
-            return this.precioCuota(parseFloat(recargo)) * this.cuotas;
-        } */
-
 }
 
 function mostrarTecnicaturas(tecnicaturas) {
@@ -262,8 +255,6 @@ formaP.addEventListener('change', () => {
     costoTotal.value = variable * precioC;
     costoCuota.value = precioC;
     alert(costoCuota.value);
-    /* costoCuota.value = 'funciona'; */
-
 });
 
 function precioCuota(cuotas, monto) {
@@ -294,14 +285,13 @@ btnGuardar.addEventListener('click', () => {
 recuperarP.addEventListener('click', () => {
     let PT = recuperarStorage('TecnicaturaPre');
     let resp;
-    if(PT != false){
-        resp = 'Presupuesto Anterior:\nTecnicatura: '+ PT.nombre+'\nCuotas: '+PT.cuotas+'\nCosto de cuota: '+PT.precioCuota+'\nCosto Total: '+PT.total;
-    }
-    else{
-        resp= 'No se encontraron elementos';
+    if (PT != false) {
+        resp = 'Presupuesto Anterior:\nTecnicatura: ' + PT.nombre + '\nCuotas: ' + PT.cuotas + '\nCosto de cuota: ' + PT.precioCuota + '\nCosto Total: ' + PT.total;
+    } else {
+        resp = 'No se encontraron elementos';
     }
     alert(resp);
-    
+
 })
 
 function recuperarStorage(PT) {
