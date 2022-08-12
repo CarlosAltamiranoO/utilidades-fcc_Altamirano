@@ -254,7 +254,6 @@ formaP.addEventListener('change', () => {
     precioC = precioCuota(variable, monto);
     costoTotal.value = variable * precioC;
     costoCuota.value = precioC;
-    alert(costoCuota.value);
 });
 
 function precioCuota(cuotas, monto) {
@@ -277,9 +276,6 @@ function crearPresupuesto() {
 btnGuardar.addEventListener('click', () => {
     let PT = crearPresupuesto();
     guardarStorage(PT);
-    alert(PT.precioCuota);
-    alert(recuperarStorage('TecnicaturaPre').nombre);
-
 })
 
 recuperarP.addEventListener('click', () => {
