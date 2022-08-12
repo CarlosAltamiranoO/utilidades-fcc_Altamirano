@@ -88,10 +88,56 @@
                 <input type="radio" name="forma" id="apro" value="aprobadas" class="radio">
                 <label for="aprobadas">Aprovadas necesarias marcando la materia</label>
                 <input type="radio" name="forma" id="correl" value="correlativas" checked class="radio">
-                <label for="correlativas" >Correlativas accesibles marcando materias aprovadas</label>
+                <label for="correlativas">Correlativas accesibles marcando materias aprovadas</label>
             </section>
             <input type="submit" value="Limpiar" id="limpiar" class="limpiar">
             <p>[Economia y comunicación no tiene correlativas en los primeros tres años de la carrera !!]</p>
+            <h2>TECNICSTURAS</h2>
+            <section class="tecnicaturas">
+                <fieldset>
+                    <legend>tecnicaturas</legend>
+                    <section class="seccionTecnicatura">
+                        <label for="comboT">selecione Tecnicatura</label>
+<!--                         <select name="comboT" id="">
+                            <option value="RP">Relaciones Publicas</option>
+                            <option value="T">Turismo</option>
+                            <option value="PM">Producion de Medios</option>
+                            <option value="PD">Periodismo Deportivo</option>
+                        </select> -->
+                        <select name="comboT" id="comboT"></select>
+                    </section>
+                    <section class="seccionTecnicatura">
+                        <section>
+                            <!-- <label for="metodoP">selecione metodo de paguo</label> -->
+                            <select name="metodoP" id="formaPago">
+                                <option value="x">selecione metodo de pago</option>
+                                <option value="01">En un pago/contado</option>
+                                <option value="03">En 3 cuotas</option>
+                                <option value="06">En 6 cuotas</option>
+                                <option value="12">En 12 cuotas</option>
+                            </select>
+                        </section>
+                        <section>
+                            <label for="costoCuota">Costo de cuota:</label>
+                            <input disabled type="text" name="costoCuota" class="costoCuota">
+                        </section>
+                        <section>
+                            <label for="costoTotal">Total a pagar: </label>
+                            <input disabled type="text" name="costoTotal" class="costoTotal">
+                        </section>
+                        <section>
+                            <input type="button" name="guardarTecni" id="guardarTecni" value="Guardar calculo" class="btn">
+                        </section>
+                        <section>
+                            <input type="button" name="recuperar" id="recuperar" value="Recuperar anterior" class="btn">
+                        </section>
+                        <section>
+                            <input type="submit" value="Limpiar" id="limpiar" class="btn">
+                        </section>
+                            
+                    </section>
+                </fieldset>
+            </section>
         </form>
 
     </main>

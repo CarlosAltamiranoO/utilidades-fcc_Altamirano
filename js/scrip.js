@@ -3,6 +3,8 @@ const correlatibas = document.getElementById('correl');
 const aprobadas = document.getElementById('apro');
 let elementoMateria = document.querySelectorAll('.materias');
 let flag0 = false;
+
+
 const materias = [{
     id: 1,
     correl: [0],
@@ -183,5 +185,131 @@ function buscarAvilitadas(n) { //debe resibir numero id que coincida con el indi
             }
             if (!bandera) materia.style.backgroundColor = 'chartreuse';
         }
+    }
+}
+
+
+
+
+
+// tecnicaturas
+const cTecnicatura = document.getElementById('comboT');
+const btnGuardar = document.getElementById('guardarTecni');
+const formaP = document.getElementById('formaPago');
+const costoCuota = document.querySelector('.costoCuota');
+const costoTotal = document.querySelector('.costoTotal');
+const recuperarP = document.getElementById('recuperar');
+const interes = [{
+    cuota: 3,
+    porsentaje: 5
+}, {
+    cuota: 6,
+    porsentaje: 10
+}, {
+    cuota: 12,
+    porsentaje: 20
+}];
+const userTecnicatura = [];
+const tecnicaturas = [{
+    id: 'RP',
+    nombre: 'Relaciones Publicas',
+    monto: 90000,
+}, {
+    id: 'T',
+    nombre: 'Turismo',
+    monto: 80000,
+}, {
+    id: 'PM',
+    nombre: 'Producion de Medios',
+    monto: 75000,
+}, {
+    id: 'PD',
+    nombre: 'Periodismo Deportivo',
+    monto: 90000,
+}]
+class PresupuestoTec {
+    constructor(nombre, monto, cuotas, precioCuota, total) {
+        this.nombre = nombre;
+        this.monto = parseFloat(monto);
+        this.cuotas = parseInt(cuotas);
+        this.precioCuota = parseFloat(precioCuota);
+        this.total = parseFloat(total);
+    }
+    /*     precioCuota(recargo){
+            return ((this.monto/ this.cuotas) *100 ) / ParseFloat(recargo); 
+        }
+        precioTotal(recargo){
+            return this.precioCuota(parseFloat(recargo)) * this.cuotas;
+        } */
+
+}
+
+function mostrarTecnicaturas(tecnicaturas) {
+    for (const tecnicatura of tecnicaturas) {
+        let option = `<option value="${tecnicatura.id}" id="${tecnicatura.id}"> Tecnicatura: ${tecnicatura.nombre}</option>`
+
+        cTecnicatura.innerHTML += option;
+    }
+}
+window.onload = mostrarTecnicaturas(tecnicaturas);
+
+formaP.addEventListener('change', () => {
+    let variable = parseInt(document.getElementById('formaPago').value);
+    let precioC;
+    if (isNaN(variable)) return;
+    let monto = tecnicaturas.find(tecnicatura => tecnicatura.id == cTecnicatura.value).monto;
+    precioC = precioCuota(variable, monto);
+    costoTotal.value = variable * precioC;
+    costoCuota.value = precioC;
+    alert(costoCuota.value);
+    /* costoCuota.value = 'funciona'; */
+
+});
+
+function precioCuota(cuotas, monto) {
+    if (cuotas != 1) {
+        let cuotaInte = interes.find(cuota => cuota.cuota == cuotas).porsentaje;
+        return (monto / cuotas) + (((monto / cuotas) * cuotaInte) / 100);
+    } else return monto;
+
+}
+
+function guardarStorage(TP) {
+    localStorage.setItem('TecnicaturaPre', JSON.stringify(TP));
+}
+
+function crearPresupuesto() {
+    return new PresupuestoTec(tecnicaturas.find(m => m.id == cTecnicatura.value).nombre, tecnicaturas.find(m => m.id == cTecnicatura.value).monto, parseInt(document.getElementById('formaPago').value), costoCuota.value, costoTotal.value);
+}
+
+
+btnGuardar.addEventListener('click', () => {
+    let PT = crearPresupuesto();
+    guardarStorage(PT);
+    alert(PT.precioCuota);
+    alert(recuperarStorage('TecnicaturaPre').nombre);
+
+})
+
+recuperarP.addEventListener('click', () => {
+    let PT = recuperarStorage('TecnicaturaPre');
+    let resp;
+    if(PT != false){
+        resp = 'Presupuesto Anterior:\nTecnicatura: '+ PT.nombre+'\nCuotas: '+PT.cuotas+'\nCosto de cuota: '+PT.precioCuota+'\nCosto Total: '+PT.total;
+    }
+    else{
+        resp= 'No se encontraron elementos';
+    }
+    alert(resp);
+    
+})
+
+function recuperarStorage(PT) {
+    let pre = JSON.parse(localStorage.getItem(PT));
+
+    if (pre == null) {
+        return false;
+    } else {
+        return pre;
     }
 }
