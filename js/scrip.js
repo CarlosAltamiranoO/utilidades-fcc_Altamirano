@@ -193,6 +193,7 @@ function buscarAvilitadas(n) { //debe resibir numero id que coincida con el indi
 
 
 // tecnicaturas
+
 const cTecnicatura = document.getElementById('comboT');
 const btnGuardar = document.getElementById('guardarTecni');
 const formaP = document.getElementById('formaPago');
@@ -227,6 +228,8 @@ const tecnicaturas = [{
     nombre: 'Periodismo Deportivo',
     monto: 90000,
 }]
+
+window.onload = mostrarTecnicaturas(tecnicaturas);
 class PresupuestoTec {
     constructor(nombre, monto, cuotas, precioCuota, total) {
         this.nombre = nombre;
@@ -244,7 +247,7 @@ function mostrarTecnicaturas(tecnicaturas) {
         cTecnicatura.innerHTML += option;
     }
 }
-window.onload = mostrarTecnicaturas(tecnicaturas);
+
 
 formaP.addEventListener('change', () => {
     let variable = parseInt(document.getElementById('formaPago').value);
@@ -264,8 +267,10 @@ function precioCuota(cuotas, monto) {
 
 }
 
+
 function guardarStorage(TP) {
     localStorage.setItem('TecnicaturaPre', JSON.stringify(TP));
+
 }
 
 function crearPresupuesto() {
@@ -276,9 +281,16 @@ function crearPresupuesto() {
 btnGuardar.addEventListener('click', () => {
     let PT = crearPresupuesto();
     guardarStorage(PT);
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'se ah guardado el presupuesto',
+        showConfirmButton: false,
+        timer: 1500
+      });
 })
 
-recuperarP.addEventListener('click', () => {
+/* recuperarP.addEventListener('click', () => {
     let PT = recuperarStorage('TecnicaturaPre');
     let resp;
     if (PT != false) {
@@ -286,7 +298,25 @@ recuperarP.addEventListener('click', () => {
     } else {
         resp = 'No se encontraron elementos';
     }
+    Swal.fire({
+        title: 'Presupuesto Guardado',
+        text: resp,
+      })
     alert(resp);
+
+}) */
+recuperarP.addEventListener('click', () => {
+    let PT = recuperarStorage('TecnicaturaPre');
+    let resp;
+    if (PT != false) {
+        resp = `<p>Presupuesto Anterior:</p><p>Tecnicatura: ${PT.nombre}</p><p>Cuotas: ${PT.cuotas}</p><p>Costo de cuota: ${PT.precioCuota}</p><p>Costo Total: ${PT.total}`;
+    } else {
+        resp = `<p>No se encontraron elementos</p>`;
+    }
+    Swal.fire({
+        html: `<h4>Presupuesto Guardado</h4>
+        <br> ${resp}`
+      })
 
 })
 
