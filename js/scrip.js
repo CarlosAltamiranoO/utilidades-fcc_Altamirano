@@ -250,7 +250,6 @@ class PresupuestoTec {
 function mostrarTecnicaturas(tecnicaturas) {
     for (const tecnicatura of tecnicaturas) {
         let option = `<option value="${tecnicatura.id}" id="${tecnicatura.id}"> Tecnicatura: ${tecnicatura.nombre}</option>`
-
         cTecnicatura.innerHTML += option;
     }
 }
@@ -265,6 +264,7 @@ formaP.addEventListener('change', () => {
     costoTotal.value = variable * precioC;
     costoCuota.value = precioC;
     cMoneda.disabled = false;
+    cTecnicatura.disabled = true;
     montoC = costoCuota.value;
     montoT = costoTotal.value;
 });
