@@ -195,6 +195,11 @@ function buscarAvilitadas(n) { //debe resibir numero id que coincida con el indi
 // tecnicaturas
 
 const cTecnicatura = document.getElementById('comboT');
+const cMoneda = document.getElementById('comboM');
+const APIKEY = '3ea1ec0259505464b753f2c1';
+let montoC;
+let montoT;
+
 const btnGuardar = document.getElementById('guardarTecni');
 const formaP = document.getElementById('formaPago');
 const costoCuota = document.querySelector('.costoCuota');
@@ -229,10 +234,12 @@ const tecnicaturas = [{
     monto: 90000,
 }]
 
-window.onload = mostrarTecnicaturas(tecnicaturas);
+window.onload = mostrarTecnicaturas(tecnicaturas), cMoneda.disabled = true;
+
 class PresupuestoTec {
-    constructor(nombre, monto, cuotas, precioCuota, total) {
+    constructor(nombre, moneda, monto, cuotas, precioCuota, total) {
         this.nombre = nombre;
+        this.moneda = moneda;
         this.monto = parseFloat(monto);
         this.cuotas = parseInt(cuotas);
         this.precioCuota = parseFloat(precioCuota);
@@ -257,7 +264,13 @@ formaP.addEventListener('change', () => {
     precioC = precioCuota(variable, monto);
     costoTotal.value = variable * precioC;
     costoCuota.value = precioC;
+    cMoneda.disabled = false;
+    montoC = costoCuota.value;
+    montoT = costoTotal.value;
 });
+cMoneda.addEventListener('change', () => {
+    obtenerTasaCambio();
+})
 
 function precioCuota(cuotas, monto) {
     if (cuotas != 1) {
@@ -274,7 +287,7 @@ function guardarStorage(TP) {
 }
 
 function crearPresupuesto() {
-    return new PresupuestoTec(tecnicaturas.find(m => m.id == cTecnicatura.value).nombre, tecnicaturas.find(m => m.id == cTecnicatura.value).monto, parseInt(document.getElementById('formaPago').value), costoCuota.value, costoTotal.value);
+    return new PresupuestoTec(tecnicaturas.find(m => m.id == cTecnicatura.value).nombre, cMoneda.options[cMoneda.selectedIndex].text, tecnicaturas.find(m => m.id == cTecnicatura.value).monto, parseInt(document.getElementById('formaPago').value), costoCuota.value, costoTotal.value);
 }
 
 
@@ -287,36 +300,21 @@ btnGuardar.addEventListener('click', () => {
         title: 'se ah guardado el presupuesto',
         showConfirmButton: false,
         timer: 1500
-      });
+    });
 })
 
-/* recuperarP.addEventListener('click', () => {
-    let PT = recuperarStorage('TecnicaturaPre');
-    let resp;
-    if (PT != false) {
-        resp = 'Presupuesto Anterior:\nTecnicatura: ' + PT.nombre + '\nCuotas: ' + PT.cuotas + '\nCosto de cuota: ' + PT.precioCuota + '\nCosto Total: ' + PT.total;
-    } else {
-        resp = 'No se encontraron elementos';
-    }
-    Swal.fire({
-        title: 'Presupuesto Guardado',
-        text: resp,
-      })
-    alert(resp);
-
-}) */
 recuperarP.addEventListener('click', () => {
     let PT = recuperarStorage('TecnicaturaPre');
     let resp;
     if (PT != false) {
-        resp = `<p>Presupuesto Anterior:</p><p>Tecnicatura: ${PT.nombre}</p><p>Cuotas: ${PT.cuotas}</p><p>Costo de cuota: ${PT.precioCuota}</p><p>Costo Total: ${PT.total}`;
+        resp = `<p>Presupuesto Anterior:</p><p>Tecnicatura: ${PT.nombre}</p><p>Moneda: ${PT.moneda}</p><p>Cuotas: ${PT.cuotas}</p><p>Costo de cuota: ${PT.precioCuota}</p><p>Costo Total: ${PT.total}`;
     } else {
         resp = `<p>No se encontraron elementos</p>`;
     }
     Swal.fire({
         html: `<h4>Presupuesto Guardado</h4>
         <br> ${resp}`
-      })
+    })
 
 })
 
@@ -328,4 +326,40 @@ function recuperarStorage(PT) {
     } else {
         return pre;
     }
+}
+
+fetch(` https://v6.exchangerate-api.com/v6/${APIKEY}/codes`)
+    .then(res => res.json())
+    .then((data) => {
+        for (element of data.supported_codes) {
+            console.log(element[1]);
+            let predet = (element[0] == 'ARS') ? 'selected' : '';
+            let option = `<option value="${element[0]}" ${predet} id="${element[0]}">${element[1]}</option>`
+            cMoneda.innerHTML += option;
+        }
+    })
+
+function obtenerTasaCambio() {
+    const URL = `https://v6.exchangerate-api.com/v6/${APIKEY}/latest/ARS`;
+
+    fetch(URL)
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            console.log(result.conversion_rates);
+            let tasaConversion = result.conversion_rates[cMoneda.value];
+            let resultCuota = (montoC * tasaConversion).toFixed(2);
+            let resultTotal = (montoT * tasaConversion).toFixed(2);
+            costoCuota.value = resultCuota;
+            costoTotal.value = resultTotal;
+
+        }).catch(() => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo Salio muy Mal!',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        });
+
 }
