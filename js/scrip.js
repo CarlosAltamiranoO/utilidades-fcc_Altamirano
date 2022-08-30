@@ -267,12 +267,9 @@ formaP.addEventListener('change', () => {
     cTecnicatura.disabled = true;
     montoC = costoCuota.value;
     montoT = costoTotal.value;
-<<<<<<< HEAD
-=======
     obtenerTasaCambio();
+})
 
->>>>>>> master
-});
 cMoneda.addEventListener('change', () => {
     obtenerTasaCambio();
 })
