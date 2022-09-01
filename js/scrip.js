@@ -1,8 +1,21 @@
-const limpiar = document.getElementById('limpiar');
-const correlatibas = document.getElementById('correl');
-const aprobadas = document.getElementById('apro');
-let elementoMateria = document.querySelectorAll('.materias');
+//para la parte de materias 
+const limpiar = document.getElementById('limpiar'),
+    correlatibas = document.getElementById('correl'),
+    aprobadas = document.getElementById('apro'),
+    elementoMateria = document.querySelectorAll('.materias'),
+    Prueba = document.querySelector("#aclaracion");
 let flag0 = false;
+// para la parte de tecnicaturas
+const cTecnicatura = document.getElementById('comboT'),
+    cMoneda = document.getElementById('comboM'),
+    APIKEY = '3ea1ec0259505464b753f2c1',
+    btnGuardar = document.getElementById('guardarTecni'),
+    formaP = document.getElementById('formaPago'),
+    costoCuota = document.querySelector('.costoCuota'),
+    costoTotal = document.querySelector('.costoTotal'),
+    btnCancelar = document.getElementById('cancelar'),
+    recuperarP = document.getElementById('recuperar');
+let montoC, montoT;
 
 
 const materias = [{
@@ -121,16 +134,47 @@ const materias = [{
     nombre: "Lenguaje III y Producción Audiovisual"
 }];
 
+const interes = [{
+    cuota: 3,
+    porsentaje: 5
+}, {
+    cuota: 6,
+    porsentaje: 10
+}, {
+    cuota: 12,
+    porsentaje: 20
+}];
+
+const tecnicaturas = [{
+    id: 'RP',
+    nombre: 'Relaciones Publicas',
+    monto: 90000,
+}, {
+    id: 'T',
+    nombre: 'Turismo',
+    monto: 80000,
+}, {
+    id: 'PM',
+    nombre: 'Producion de Medios',
+    monto: 75000,
+}, {
+    id: 'PD',
+    nombre: 'Periodismo Deportivo',
+    monto: 90000,
+}]
+
+window.onload = mostrarTecnicaturas(tecnicaturas), cMoneda.disabled = true;
+
 for (const elemento of elementoMateria) {
     elemento.addEventListener('click', () => {
-        let cod = parseInt(elemento.id);
-        let colorP = document.getElementById(cod);
-        colorP.style.backgroundColor = 'coral';
-        if (flag0) {
+        let cod = parseInt(elemento.id); //se guarda el id de la materia en la que se hiso click
+        let colorP = document.getElementById(cod); // se accede al elemento
+        colorP.style.backgroundColor = 'coral';  // se cambia el color
+        if (flag0) {        // flag en caso de que que se selecciona "Aprovadas necesarias marcando la materia" o "Correlativas accesibles marcando materias aprovadas"
             BuscarCorrelativas(cod - 1);
         } else {
-            let eco = document.getElementById(6);
-            eco.style.backgroundColor = 'darkgreen';
+            let eco = document.getElementById(6); // se selecciona la materia EyC
+            eco.style.backgroundColor = 'darkgreen'; // se marca con verde oscuro el elemento ya que no avilita nada
             buscarAvilitadas(cod - 1);
         }
     });
@@ -145,12 +189,14 @@ correlatibas.addEventListener('click', () => {
     for (const elemento of elementoMateria) {
         elemento.style.backgroundColor = 'rgba(121, 115, 115, 0.3)';
     }
+    Prueba.textContent = "Seleccione las materias APROBADAS para saber las materias que puede cursar";
     flag0 = false;
 });
 aprobadas.addEventListener('click', () => {
     for (const elemento of elementoMateria) {
         elemento.style.backgroundColor = 'rgba(121, 115, 115, 0.3)';
     }
+    Prueba.textContent = "Seleccione las materias que quiere CURSAR para conoser las que nesecita tener aprobadas";
     flag0 = true;
 });
 
@@ -188,53 +234,15 @@ function buscarAvilitadas(n) { //debe resibir numero id que coincida con el indi
     }
 }
 
+function recargar() {
+    location.reload()
+}
 
-
-
+limpiar.addEventListener('click', () => recargar())
 
 // tecnicaturas
 
-const cTecnicatura = document.getElementById('comboT');
-const cMoneda = document.getElementById('comboM');
-const APIKEY = '3ea1ec0259505464b753f2c1';
-let montoC;
-let montoT;
-
-const btnGuardar = document.getElementById('guardarTecni');
-const formaP = document.getElementById('formaPago');
-const costoCuota = document.querySelector('.costoCuota');
-const costoTotal = document.querySelector('.costoTotal');
-const recuperarP = document.getElementById('recuperar');
-const interes = [{
-    cuota: 3,
-    porsentaje: 5
-}, {
-    cuota: 6,
-    porsentaje: 10
-}, {
-    cuota: 12,
-    porsentaje: 20
-}];
-const userTecnicatura = [];
-const tecnicaturas = [{
-    id: 'RP',
-    nombre: 'Relaciones Publicas',
-    monto: 90000,
-}, {
-    id: 'T',
-    nombre: 'Turismo',
-    monto: 80000,
-}, {
-    id: 'PM',
-    nombre: 'Producion de Medios',
-    monto: 75000,
-}, {
-    id: 'PD',
-    nombre: 'Periodismo Deportivo',
-    monto: 90000,
-}]
-
-window.onload = mostrarTecnicaturas(tecnicaturas), cMoneda.disabled = true;
+btnCancelar.addEventListener('click', () => recargar())
 
 class PresupuestoTec {
     constructor(nombre, moneda, monto, cuotas, precioCuota, total) {
@@ -253,7 +261,6 @@ function mostrarTecnicaturas(tecnicaturas) {
         cTecnicatura.innerHTML += option;
     }
 }
-
 
 formaP.addEventListener('change', () => {
     let variable = parseInt(document.getElementById('formaPago').value);
@@ -282,7 +289,6 @@ function precioCuota(cuotas, monto) {
 
 }
 
-
 function guardarStorage(TP) {
     localStorage.setItem('TecnicaturaPre', JSON.stringify(TP));
 
@@ -296,38 +302,33 @@ function crearPresupuesto() {
 btnGuardar.addEventListener('click', () => {
     let PT = crearPresupuesto();
     guardarStorage(PT);
-    Swal.fire({
+    swal.fire({
         position: 'top-end',
         icon: 'success',
         title: 'se ah guardado el presupuesto',
         showConfirmButton: false,
-        timer: 1500
-    });
+        timer: 1500,
+    })
+    /* document.forms[0].reset(); - es nesesario recargar todo, no solo el formulario*/
+    setTimeout(() => recargar(), 1500)
 })
 
 recuperarP.addEventListener('click', () => {
     let PT = recuperarStorage('TecnicaturaPre');
     let resp;
-    if (PT != false) {
-        resp = `<p>Presupuesto Anterior:</p><p>Tecnicatura: ${PT.nombre}</p><p>Moneda: ${PT.moneda}</p><p>Cuotas: ${PT.cuotas}</p><p>Costo de cuota: ${PT.precioCuota}</p><p>Costo Total: ${PT.total}`;
-    } else {
+    PT ? resp = `<p>Presupuesto Anterior:</p><p>Tecnicatura: ${PT.nombre}</p><p>Moneda: ${PT.moneda}</p><p>Cuotas: ${PT.cuotas}</p><p>Costo de cuota: ${PT.precioCuota}</p><p>Costo Total: ${PT.total}` :
         resp = `<p>No se encontraron elementos</p>`;
-    }
     Swal.fire({
-        html: `<h4>Presupuesto Guardado</h4>
-        <br> ${resp}`
+        html: `<h4>Presupuesto Guardado</h4><br> ${resp}`
     })
 
 })
 
 function recuperarStorage(PT) {
     let pre = JSON.parse(localStorage.getItem(PT));
-
-    if (pre == null) {
-        return false;
-    } else {
-        return pre;
-    }
+    let res;
+    pre == null ? res = false : res = pre;
+    return res;
 }
 
 fetch(` https://v6.exchangerate-api.com/v6/${APIKEY}/codes`)

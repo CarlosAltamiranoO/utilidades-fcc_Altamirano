@@ -13,11 +13,10 @@
     <header>
         <h1>CALCULO DE CORRELATIVIDADES!</h1>
     </header>
-
     <main>
         <h2>[ Desafío: Fetch en tu proyecto]</h2>
-        <em>haga click en la materia que desea consultar. </em>
-        <form action="">
+        <em id="aclaracion">Seleccione las materias APROBADAS para saber las materias que puede cursar</em>
+        <form action="" id="Formulario">
             <section class="ConjuntoMaterias">
                 <fieldset class="anio">
                     <legend> PRE-INGRESO </legend>
@@ -26,62 +25,60 @@
                 </fieldset>
                 <fieldset class="anio">
                     <legend> PRIMER AÑO </legend>
-                    <fieldset class="cuatrimestre">
+                    <fieldset>
                         <legend> 1° cuatrimestre</legend>
                         <p id="3" class="materias">Historia Social Contemporánea</p>
                         <p id="4" class="materias">Introducción a la Comunicación Social</p>
                         <p id="5" class="materias"> Teoría del Conocimiento y Lógica</p>
                     </fieldset>
-                    <fieldset class="cuatrimestre">
+                    <fieldset>
                         <legend> 2° cuatrimestre</legend>
                         <p id="6" class="materias"> Economía y Comunicación</p>
                         <p id="7" class="materias">Psicología y Comunicación</p>
                         <p id="8" class="materias"> Teorías Sociológicas I</p>
                     </fieldset>
-                    <fieldset class="anual">
+                    <fieldset>
                         <legend> anual</legend>
                         <p id="9" class="materias">Lenguaje I y Producción Gráfica</p>
                     </fieldset>
                 </fieldset>
                 <fieldset class="anio">
                     <legend> SEGUNDO AÑO </legend>
-                    <fieldset class="cuatrimestre">
+                    <fieldset>
                         <legend> 1° cuatrimestre</legend>
                         <p id="10" class="materias">Psicología Social </p>
                         <p id="11" class="materias">Teorías Sociológicas II</p>
                         <p id="12" class="materias">Informática Básica Aplicada</p>
                     </fieldset>
-                    <fieldset class="cuatrimestre">
+                    <fieldset>
                         <legend> 2° cuatrimestre</legend>
                         <p id="13" class="materias">Lingüística</p>
                         <p id="14" class="materias">Teorías de la Comunicación I</p>
                         <p id="15" class="materias">Historia Argentina Contemporánea</p>
                     </fieldset>
-                    <fieldset class="anual">
+                    <fieldset>
                         <legend> anual</legend>
                         <p id="16" class="materias">Lenguaje II y Producción Radiofónica</p>
                     </fieldset>
-
                 </fieldset>
                 <fieldset class="anio">
                     <legend> TERCER AÑO </legend>
-                    <fieldset class="cuatrimestre">
+                    <fieldset>
                         <legend> 1° cuatrimestre</legend>
                         <p id="17" class="materias">Teorías de la Comunicación II</p>
                         <p id="18" class="materias">Antropología Socio-Cultural</p>
                         <p id="19" class="materias">Movimientos Estéticos y Cultura Argentina</p>
                     </fieldset>
-                    <fieldset class="cuatrimestre">
+                    <fieldset>
                         <legend> 2° cuatrimestre</legend>
                         <p id="20" class="materias"> Semiótica</p>
                         <p id="21" class="materias">Política y Comunicación</p>
                         <p id="22" class="materias">Metodología de la Inv. aplicada</p>
                     </fieldset>
-                    <fieldset class="anual">
+                    <fieldset>
                         <legend> anual</legend>
                         <p id="23" class="materias">Lenguaje III y Producción Audiovisual</p>
                     </fieldset>
-
                 </fieldset>
             </section>
             <section>
@@ -90,11 +87,12 @@
                 <input type="radio" name="forma" id="correl" value="correlativas" checked class="radio">
                 <label for="correlativas">Correlativas accesibles marcando materias aprovadas</label>
             </section>
-            <input type="submit" value="Limpiar" id="limpiar" class="limpiar">
-            <p>[Economia y comunicación no tiene correlativas en los primeros tres años de la carrera !!]</p>
+            <!-- <input type="submit" value="Limpiar" id="limpiar" class="limpiar"> -->
+            <input type="button" value="Limpiar" id="limpiar" class="limpiar">
+            <p class="disclaimer">[Economia y comunicación no tiene correlativas !!!]</p>
             <h2>TECNICATURAS</h2>
             <section class="tecnicaturas">
-                <fieldset>
+                <fieldset class="tec">
                     <legend>tecnicaturas</legend>
                     <section class="seccionTecnicatura">
                         <label for="comboT">selecione Tecnicatura</label>
@@ -102,8 +100,6 @@
                     </section>
                     <section class="seccionTecnicatura">
                         <section>
-                            <!-- <label for="metodoP">selecione metodo de paguo</label> -->
-                            <select name="comboM" id="comboM"></select>
                             <select name="metodoP" id="formaPago">
                                 <option value="x">selecione metodo de pago</option>
                                 <option value="01">En un pago/contado</option>
@@ -111,7 +107,7 @@
                                 <option value="06">En 6 cuotas</option>
                                 <option value="12">En 12 cuotas</option>
                             </select>
-                            
+                            <select name="comboM" id="comboM"></select>
                         </section>
                         <section>
                             <label for="costoCuota">Costo de cuota:</label>
@@ -129,20 +125,17 @@
                             <input type="button" name="recuperar" id="recuperar" value="Recuperar anterior" class="btn">
                         </section>
                         <section>
-                            <input type="submit" value="Limpiar" id="limpiar" class="btn">
+                            <input type="button" name="cancelar" id="cancelar" value="Cancelar" class="btn">
                         </section>
-
                     </section>
                 </fieldset>
             </section>
         </form>
-
     </main>
     <footer>
         <p>Paguina derivada de Sistemas de la facultad de ciencias de la comunicacion FCC <a
                 href="https://carlos-alt-sistemas.netlify.app"><b>Sistemas FCC</b></a></p>
     </footer>
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.28/dist/sweetalert2.all.min.js"></script>
     <script src="./js/scrip.js"></script>
 </body>

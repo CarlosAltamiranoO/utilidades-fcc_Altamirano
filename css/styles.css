@@ -17,7 +17,7 @@ main {
     padding-left: 1em;
     padding-right: 1em;
     font-family: Verdana;
-    background-color: rgb(229, 231, 240);
+    /* background-color: rgb(180, 243, 236); */
 }
 
 footer {
@@ -55,9 +55,10 @@ h2 {
 
 em {
     color: coral;
+    font-size: x-large;
 }
 
-.materias{
+.materias {
     text-align: left;
     padding: 5px;
     margin: 10px;
@@ -69,36 +70,44 @@ em {
     background-color: rgba(165, 5, 5, 0.3);
 }
 
-.limpiar{
+.limpiar {
     width: 12em;
     height: 2em;
     font-size: larger;
     margin: 1em;
 }
+
 .btn {
-        width: 10em;
-        height: 1.5em;
-        font-size: larger;
+    width: 10em;
+    height: 1.5em;
+    font-size: larger;
 }
-label{
-    font-size:large;
+
+label {
+    font-size: large;
     margin-right: 1em;
     margin: auto;
 }
 
-
-
-
-.tecnicaturas{
-    width: 80%;
-    margin:  0 auto;
+.disclaimer {
+    color: red;
 }
+
+
+
+.tecnicaturas {
+    width: 90%;
+    height: fit-content;
+    margin: 0 auto;
+}
+
 .tecnicaturas fieldset {
     display: flex;
     flex-direction: row;
 
 }
-.seccionTecnicatura{
+
+.seccionTecnicatura {
     margin: 10px;
     width: 50%;
 }
@@ -106,9 +115,14 @@ label{
 select {
     font-size: large;
 }
-.seccionTecnicatura section{
+
+.seccionTecnicatura section {
     width: 100%;
     text-align: right;
     margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.tec {
     margin-bottom: 10px;
 }
