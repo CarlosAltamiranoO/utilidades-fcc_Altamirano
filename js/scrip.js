@@ -309,7 +309,6 @@ btnGuardar.addEventListener('click', () => {
         showConfirmButton: false,
         timer: 1500,
     })
-    /* document.forms[0].reset(); - es nesesario recargar todo, no solo el formulario*/
     setTimeout(() => recargar(), 1500)
 })
 
